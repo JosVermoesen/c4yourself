@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "hello.c": "cpp",
+        "XMAS2.C": "cpp",
+        "XMASTREE.C": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
+}
