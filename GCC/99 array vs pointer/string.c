@@ -21,7 +21,9 @@ int main()
     printf("s3: %s\n", s3);
     printf("sizeof(s1): %d\n", sizeof(s1)); // sizeof(s1) = 13
     printf("sizeof(s2): %d\n", sizeof(s2)); // sizeof(s2) = 13 
-    printf("sizeof(s3): %d\n", sizeof(s3)); // sizeof(s3) = 8
+    printf("sizeof(s3): %d\n", sizeof(s3)); // sizeof(s3) = 8?? 8 on 64-bit machine
+    
+    return 0;
 }
 /* Source:
    https://www.youtube.com/watch?v=Qp3WatLL_Hc
