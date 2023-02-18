@@ -3,10 +3,13 @@
 int main()
 {
     char s1[] = "Hello vscode";
+    char s2[] = {'H', 'e', 'l', 'l', 'o', ' ', 'v', 's', 'c', 'o', 'd', 'e', '\0'};
+
+    printf("s1: %s\n", s1);
     s1[0] = 'h';
     printf("s1: %s\n", s1);
-
-    char s2[] = {'H', 'e', 'l', 'l', 'o', ' ', 'v', 's', 'c', 'o', 'd', 'e', '\0'};
+    
+    printf("s2: %s\n", s2);
     s2[1] = 'a';
     printf("s2: %s\n", s2);
 
