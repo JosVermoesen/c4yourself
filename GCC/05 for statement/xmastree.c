@@ -1,8 +1,11 @@
+/* XMASTREE.C
+   Source code origin:
+   https://c-for-dummies.com/blog/?p=5681
+*/
 #include <stdio.h>
 
 int main()
 {
-
     int x, y, stars;
     int height = 22; /* CHANGE TO 27 FOR AMSTRAD PCW 31 ROW SCREEN! */
 
@@ -15,6 +18,5 @@ int main()
         }
         putchar('\n');
     }
-
     return (0);
 }

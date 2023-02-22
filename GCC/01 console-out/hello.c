@@ -9,7 +9,7 @@ int main() /* Entry point of the program */
     /*
     A function that prints to the console
     Use printf("") to print a string, end always with a semicolon
-    Return success(0) or failure(-1) to the OS
+    Returns success(0) or failure(-1) to the OS
     */
     printf("Hello, World!");
 
