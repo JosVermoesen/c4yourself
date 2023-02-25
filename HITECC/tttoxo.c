@@ -7,6 +7,15 @@
 #include <ctype.h>
 #include <time.h>
 
+#define CLS "\033[H\033[2J"     /* clears the screen */
+#define C_RED "\033[31;1;4m"    /* changes color to red */
+#define C_BLUE "\033[34;1;4m"   /* changes color to blue */
+#define C_GREEN "\033[32;1;4m"  /* changes color to green */
+#define C_YELLOW "\033[33;1;4m" /* changes color to yellow */
+#define C_BOLD "\033[1m"        /* bolds the text */
+#define C_UNDERLINE "\033[4m"   /* underlines the text */
+#define C_RESET "\033[0m"       /* resets the color */
+
 char board[3][3];
 char PLAYER = 'X';
 char COMPUTER = 'O';
@@ -52,7 +61,9 @@ int main()
         printBoard();
         printWinner(winner);
 
-        printf("\nWould you like to play again? (Y/N): ");
+        printf(C_RED "\nWould ");
+        printf(C_BLUE "you");
+        printf(C_GREEN " like to play again? (Y/N): " C_RESET);
         scanf("%c");
         scanf("%c", &response);
         response = toupper(response);
@@ -77,6 +88,7 @@ void resetBoard()
 }
 void printBoard()
 {
+    printf(CLS);
     printf(" %c | %c | %c ", board[0][0], board[0][1], board[0][2]);
     printf("\n---|---|---\n");
     printf(" %c | %c | %c ", board[1][0], board[1][1], board[1][2]);
