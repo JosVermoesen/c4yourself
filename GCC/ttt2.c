@@ -1,3 +1,7 @@
+/*
+ Another try of Tic tac toe game written in C
+ Source code origin: https://www.youtube.com/watch?v=usTXYZHfjKc
+*/
 #include <stdio.h>
 #include <conio.h>
 
@@ -44,7 +48,7 @@ void main()
 
 void printBoard()
 {
-    printf("\e[1;1H\e[2J"); // clear screen           
+    printf("\e[1;1H\e[2J"); // clear screen
     printf("=== TIC TAC TOE ===\n\n");
     printf("     |     |     \n");
     printf("  %c  |  %c  |  %c  \n", board[1], board[2], board[3]);
