@@ -12,8 +12,6 @@
 #define C_BLUE "\033[34;1;4m"   /* changes color to blue */
 #define C_GREEN "\033[32;1;4m"  /* changes color to green */
 #define C_YELLOW "\033[33;1;4m" /* changes color to yellow */
-#define C_BOLD "\033[1m"        /* bolds the text */
-#define C_UNDERLINE "\033[4m"   /* underlines the text */
 #define C_RESET "\033[0m"       /* resets the color */
 
 char board[3][3];
