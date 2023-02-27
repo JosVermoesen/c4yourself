@@ -3,7 +3,7 @@
  Source code origin: https://www.youtube.com/watch?v=usTXYZHfjKc
 */
 #include <stdio.h>
-#include <conio.h>
+//#include <conio.h>
 
 void printBoard();
 int checkWin();

@@ -53,7 +53,7 @@ int main()
         printWinner(winner);
 
         printf("\nWould you like to play again? (Y/N): ");
-        scanf("%c");
+        //scanf("%c");
         scanf("%c", &response);
         response = toupper(response);
     } while (response == 'Y');
