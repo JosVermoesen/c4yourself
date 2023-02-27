@@ -1,13 +1,20 @@
-/*	HELLO.C
+/*
+ HELLO.C
+ Source code origin: https://www.youtube.com/watch?v=KJgsSFOSQv0
+ Works with GCC and HITEC C, check the changes for MECC
 
-	Source code origin: https://www.youtube.com/watch?v=KJgsSFOSQv0
-    Works with GCC and HITEC C, check the changes for MECC
+ To compile with HITEC C:
 
-	To compile with HITEC C:
+   c hello
 
-	c hello
+ #include, #define, #pragma, #if, #else, #elif, #endif,
+ #error, #warning, #line, #ident, #undef, #include_next,
+ #sccs, #assert, #pragma, #prag etc. are preprocessor directives
+
+ More info here:
+ https://en.wikipedia.org/wiki/C_preprocessor
+ https://gcc.gnu.org/onlinedocs/cpp/Include-Syntax.html
 */
-
 #include <stdio.h>
 /*
 Standard Input/Output library (printf, scanf, etc.)

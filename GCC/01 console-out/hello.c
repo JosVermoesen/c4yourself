@@ -1,3 +1,12 @@
+/*
+ #include, #define, #pragma, #if, #else, #elif, #endif,
+ #error, #warning, #line, #ident, #undef, #include_next,
+ #sccs, #assert, #pragma, #prag etc. are preprocessor directives
+
+ More info here:
+ https://en.wikipedia.org/wiki/C_preprocessor
+ https://gcc.gnu.org/onlinedocs/cpp/Include-Syntax.html
+*/
 #include <stdio.h>
 /*
 Standard Input/Output library (printf, scanf, etc.)

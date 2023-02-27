@@ -45,6 +45,15 @@
 // #define CC_FWRITE	// Include fwrite().
 // #define CC_FGETS	// Include fgets().
 
+/*
+ #include, #define, #pragma, #if, #else, #elif, #endif,
+ #error, #warning, #line, #ident, #undef, #include_next,
+ #sccs, #assert, #pragma, #prag etc. are preprocessor directives
+
+ More info here:
+ https://en.wikipedia.org/wiki/C_preprocessor
+ https://gcc.gnu.org/onlinedocs/cpp/Include-Syntax.html
+*/
 /* Some defs. to save memory
  */
 #define CC_NO_MUL	 // To exclude MULTIPLICATION code.
