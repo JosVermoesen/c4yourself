@@ -47,6 +47,15 @@ int main()
     int imax = 2147483647, imin = -2147483648;
     unsigned int i0 = 4294967295;
 
+    char test[5]; // 5 bytes
+    test[0] = 'T';
+    test[1] = 'e';
+    test[2] = 's';
+    test[3] = 't';
+    test[4] = '\0'; // null terminator
+
+    printf("%s\n", test); // Test
+
     // Print to console
     printf("Hello %s\n", name);                                // %s is a string
     printf("You are %d years old\n", age);                     // %d is a decimal number

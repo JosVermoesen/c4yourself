@@ -10,6 +10,22 @@ int main()
     int imax = 32767, imin = -32768;
     unsigned int i0 = 65535;
 
+    char test[5]; /* 5 bytes */
+    char *test2;
+    test2 = "Test Whatever"; /* ? bytes */
+    test[0] = 'T';
+    test[1] = 'e';
+    test[2] = 's';
+    test[3] = 't';
+    test[4] = '\0'; /* null terminator */
+
+    printf("test string has value: %s\n", test); /* Test */
+    printf("test string has size: %d bytes\n\n", sizeof(test));
+
+    printf("test2 string has value: %s\n", test2); /* Test */
+    printf("test2 string has size: %d bytes\n", sizeof(test2));
+    printf("sems not working as expected\n\n");
+    
     printf("int imax has max +value: %d\n", imax);
     printf("imax has size: %d bytes\n", sizeof(imax));
     printf("int imin has min -value: %d\n", imin);
