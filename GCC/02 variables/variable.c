@@ -39,11 +39,13 @@ int main()
     long long ll = -9223372036854775807 + 1;      // 8 bytes (-9223372036854775808 to 9223372036854775807) %d long long int
     unsigned long long m = 18446744073709551615U; // 8 bytes (0 to 18446744073709551615) %d unsigned long long int
 
-    // on 8-bit computer int has max value of +32767 and min value of -32768 (2 bytes)
-    // on 16-bit computer int has max value of +2147483647 and min value of -2147483648 (4 bytes)
+    // on 8-bit, int has max value of +32767 and min value of -32768 (2 bytes)
+    // on 8-bit, unsigned int has max value of +65535 and min value of 0 (2 bytes)
 
-    int imax = 32767, imin = -32768;
-    unsigned int i0 = 65535;
+    // on 16-bit and higher, int has max value of +2147483647 and min value of -2147483648 (4 bytes)
+    // on 16-bit and higher, unsigned int has max value of +4294967295 and min value of 0 (4 bytes)
+    int imax = 2147483647, imin = -2147483648;
+    unsigned int i0 = 4294967295;
 
     // Print to console
     printf("Hello %s\n", name);                                // %s is a string
@@ -68,11 +70,11 @@ int main()
     printf("unsigned long long (int) m= %llu\n\n", m);         // unsigned long int
 
     printf("int imax has max +value: %d\n", imax);
-    printf("imax has size: %d\n", sizeof(imax));
+    printf("imax has size: %d bytes\n", sizeof(imax));
     printf("int imin has min -value: %d\n", imin);
-    printf("imin has size: %d\n", sizeof(imin));
+    printf("imin has size: %d bytes\n", sizeof(imin));
     printf("unsigned int i0 has max value: %u\n", i0);
-    printf("i0 has size: %d\n", sizeof(i0));
+    printf("i0 has size: %d bytes\n", sizeof(i0));
 
     return 0;
 }
