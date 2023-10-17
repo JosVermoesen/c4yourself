@@ -110,15 +110,14 @@ int main()
     iArray[8] = 8;
     iArray[9] = 1;
 
-    /* char sArray[9];
-    sArray = {'e', 'g', 'i', 'd', 'a', 'f', 'b', 'h', 'c'};
+    /* char sArray = [ 'e', 'g', 'i', 'd', 'a', 'f', 'b', 'h', 'c', 'j' ];
     int sSize = sizeof(sArray) / sizeof(sArray[0]); */
 
     iPrintArray(iArray, iSize);
-    printf("ascending\n");
+    printf("ascendin:\n");
     iSortAsc(iArray, iSize);
     iPrintArray(iArray, iSize);
-    printf("descending\n");    
+    printf("descending:\n");
     iSortDsc(iArray, iSize);
     iPrintArray(iArray, iSize);
 
