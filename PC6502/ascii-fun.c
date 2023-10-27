@@ -2,20 +2,10 @@
     Experimenting ASCII values and escape codes in C.
  */
 
-#include <rp6502.h>
+// #include <rp6502.h>
 #include <stdio.h>
 
 static const char *CSI = "\33[";  // escape
-
-static const char *BLACK = "30m"; // color codes
-static const char *RED = "31m";
-static const char *GREEN = "32m";
-static const char *BLUE = "34m";
-static const char *MAGENTA = "35m";
-static const char *CYAN = "36m";
-static const char *WHITE = "37m";
-static const char *YELLOW = "93m";
-static const char *UNDEFINED = "37m";
 
 const int black = 0;
 const int red = 1;
@@ -28,55 +18,87 @@ const int white = 7;
 
 void clear()
 {
-    puts("\30\f");
-    // printf("\f"); // also clear console
+    // puts("\30\f"); // rp6502 and others
+    // printf("\f"); // also clears console
+    printf("\e[1;1H\e[2J"); // DOS/WINDOWS
 }
 
-void setColor(colorCode)
+void setColor(int colorCode)
 {
+    /*
+        static const char *BLACK = "30m"; // color codes
+        static const char *RED = "31m";
+        static const char *YELLOW = "93m";
+        static const char *GREEN = "32m";
+        static const char *BLUE = "34m";
+        static const char *MAGENTA = "35m";
+        static const char *CYAN = "36m";
+        static const char *WHITE = "37m";
+        static const char *UNDEFINED = "37m";
+     */
     switch(colorCode)
     {
-        case 0:
-            printf("%s%s", CSI, BLACK);
+        case 0: // BLACK
+            printf("%s%s", CSI, "30m");
             break;
-        case 1:
-            printf("%s%s", CSI, RED);
+        case 1: // RED
+            printf("%s%s", CSI, "31m");
             break;
-        case 2:
-            printf("%s%s", CSI, GREEN);
+        case 2: // GREEN
+            printf("%s%s", CSI, "32m");
             break;
-        case 3:
-            printf("%s%s", CSI, YELLOW);
+        case 3: // YELLOW
+            printf("%s%s", CSI, "93m");
             break;
-        case 4:
-            printf("%s%s", CSI, BLUE);
+        case 4: // BLUE
+            printf("%s%s", CSI, "34m");
             break;
-        case 5:
-            printf("%s%s", CSI, MAGENTA);
+        case 5: // MAGENTA
+            printf("%s%s", CSI, "35m");
             break;
-        case 6:
-            printf("%s%s", CSI, CYAN);
+        case 6: // CYAN
+            printf("%s%s", CSI, "36m");
             break;
-        case 7:
-            printf("%s%s", CSI, WHITE);
+        case 7: // WHITE
+            printf("%s%s", CSI, "37m");
             break;
 
         // operator doesn't match any case constant +, -, *, /
         default:
             printf("Error! operator is not correct. Switching to white");
-            printf("%s%s", CSI, WHITE);
+            printf("%s%s", CSI, "37m");
     }
     
 }
 
-void charset()
+void anyKey()
+{
+    /* while (!(RIA.ready & RIA_READY_RX_BIT))
+        ;
+    printf("pressed: %c\n", RIA.rx); */
+    long nc;
+
+	nc = 0;
+	printf("Press some keys please (Q to quit) ");
+	while (getchar() != 'Q')
+		/*
+		  Use != EOF eventually, a value that is returned
+		  by getchar() when the end of the file is reached.
+		  Use CTRL+C to send EOF to the program. Does not work
+		  always in the console window.
+		*/
+		++nc;
+	printf("You pressed %ld times\n", nc);
+}
+
+void charset(int aFrom, int aTo)
 {
     int i;
-    setColor(green);
+    setColor(red);
     clear();   
 
     /* Print ASCII values from 0 to 255 */
-    for (i = 32; i <= 221; i++)
+    for (i = aFrom; i <= aTo; i++)
     {
         printf("%c: %d", i, i);
         printf(" ");
@@ -89,14 +111,14 @@ void charset()
 
 int main()
 {
-    int a_ulc = 201; // upper left corner
-    int a_urc = 187; // upper right corner
-    int a_llc = 200; // lower left corner
-    int a_lrc = 188; // lower right corner
-    int a_h = 205;   // horizontal
-    int a_v = 186;   // vertical
+    int a_ulc = 201; // double upper left corner
+    int a_urc = 187; // double upper right corner
+    int a_llc = 200; // double lower left corner
+    int a_lrc = 188; // double lower right corner
+    int a_h = 205;   // double horizontal
+    int a_v = 186;   // double vertical
 
-    charset();
+    charset(32,221);
 
     printf("Upper left %c = %d\n", a_ulc, a_ulc);
     printf("Upper right %c = %d\n", a_urc, a_urc);
