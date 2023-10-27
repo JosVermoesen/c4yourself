@@ -1,16 +1,9 @@
 /*
     Experimenting ASCII values and escape codes in C.
  */
-// #define SO_6502
-#define SO_DOSWIN
 
-#ifdef SO_6502
-    #include <rp6502.h>
-    #include <stdio.h>
-#else
-    #include <conio.h>
-    #include <stdio.h>    
-#endif
+// #include <rp6502.h>
+#include <stdio.h>
 
 static const char *CSI = "\33["; // escape
 
@@ -25,12 +18,9 @@ const int white = 7;
 
 void clear()
 {
-    #ifdef SO_6502
-        puts("\30\f"); // rp6502 and others
-        // printf("\f"); // also clears console
-    #else
-        printf("\e[1;1H\e[2J"); // DOS/WINDOWS
-    #endif    
+    // puts("\30\f"); // rp6502 and others
+    // printf("\f"); // also clears console
+    printf("\e[1;1H\e[2J"); // DOS/WINDOWS
 }
 
 void setColor(int colorCode)
@@ -81,30 +71,23 @@ void setColor(int colorCode)
 }
 
 void anyKey()
-{    
-    char c;
-    #ifdef SO_6502
-        while (!(RIA.ready & RIA_READY_RX_BIT))
-            ;
-        c = RIA.rx;
-    #else
-        c = getch();
-    #endif    
-    printf("pressed: %c %d\n", c, c);
+{
+    /* while (!(RIA.ready & RIA_READY_RX_BIT))
+        ;
+    printf("pressed: %c\n", RIA.rx); */
+    long nc;
 
-    /* Use != EOF eventually, a value that is returned
-       by getchar() when the end of the file is reached.
-       Use CTRL+C to send EOF to the program. Does not work
-       always in the console window.
-    */
-    /* long nc;
-
-    nc = 0;
-    printf("Press some keys please (Q to quit) ");
-    while (getchar() != 'Q')
-
-        ++nc;
-    printf("You pressed %ld times\n", nc); */
+	nc = 0;
+	printf("Press some keys please (Q to quit) ");
+	while (getchar() != 'Q')
+		/*
+		  Use != EOF eventually, a value that is returned
+		  by getchar() when the end of the file is reached.
+		  Use CTRL+C to send EOF to the program. Does not work
+		  always in the console window.
+		*/
+		++nc;
+	printf("You pressed %ld times\n", nc);
 }
 
 void charset(int aFrom, int aTo)
@@ -127,17 +110,8 @@ int main()
     int a_lrc = 188; // double lower right corner
     int a_h = 205;   // double horizontal
     int a_v = 186;   // double vertical
-    char c;
 
-    clear();
-    setColor(green);
-    charset(32, 221);
-
-    setColor(white);
-
-    printf("\n\nPress any key to continue.\n");
-    anyKey();
-    clear();
+    charset(32,221);
 
     printf("Upper left %c = %d\n", a_ulc, a_ulc);
     printf("Upper right %c = %d\n", a_urc, a_urc);
@@ -145,14 +119,5 @@ int main()
     printf("Lower right %c = %d\n", a_lrc, a_lrc);
     printf("Horizontal %c = %d\n", a_h, a_h);
     printf("Vertical %c = %d\n", a_v, a_v);
-
-    c = getchar();
-    printf("Char: %c %d\n", c, c);
-
-    while (1)
-    {
-        anyKey();
-    }
-
     return 0;
 }
