@@ -9,6 +9,7 @@
 #include <rp6502.h>
 #include <stdio.h>
 #else
+#include <conio.h>
 #include <stdio.h>
 #endif
 
@@ -31,6 +32,19 @@ void clear()
 #else
     printf("\e[1;1H\e[2J"); // DOS/WINDOWS
 #endif
+}
+
+void anyKey()
+{    
+    char c;
+    #ifdef SO_6502
+        while (!(RIA.ready & RIA_READY_RX_BIT))
+            ;
+        c = RIA.rx;
+    #else
+        c = getch();
+    #endif    
+    // printf("pressed: %c %d\n", c, c);
 }
 
 void setColor(int colorCode)
@@ -71,10 +85,9 @@ void setColor(int colorCode)
 
 int main()
 {
-
     int a;
     int b;
-    int choise; 
+    int choise;
 
     clear();
     setColor(green);
@@ -82,10 +95,9 @@ int main()
     // Menu display
     printf("MENU:\n1. Addition\n2. Subtraction\n3. Multiplication\n4. Division\n5. Exit\n");
 
-
-
     // Infinite Loop for choice input
-    while (1)    {
+    while (1)
+    {
         choise = -1;
         printf("\nEnter the operation you wish to perform:");
         scanf("%i", &choise);
@@ -136,6 +148,8 @@ int main()
         // operator doesn't match any case constant +, -, *, /
         default:
             printf("> Invalid Input\n");
+            printf("Any key to abort program\n");
+            anyKey();            
             return 0;
         }
     }
