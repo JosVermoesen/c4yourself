@@ -143,8 +143,7 @@ int main()
             printf("Enter First number :");
             scanf("%d", &a);
             printf("Enter Second number:");
-            scanf("%d", &b);
-            result = a/b;
+            scanf("%d", &b);            
             printf("\nResult: %d / %d = %d\n", a, b, (a/b));            
         }
         else if (choice == 5){
