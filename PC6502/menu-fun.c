@@ -1,16 +1,15 @@
 /*
-    Menu example in C.
-    https://www.scaler.com/topics/menu-driven-program-in-c/
+    Simple menu example in C
+    Jos Vermoesen
  */
-// #define SO_6502
-#define SO_DOSWIN
+#define SO_6502
+// #define SO_DOSWIN
 
 #ifdef SO_6502
-    #include <rp6502.h>
-    #include <stdio.h>
+#include <rp6502.h>
+#include <stdio.h>
 #else
-    #include <conio.h>
-    #include <stdio.h>    
+#include <stdio.h>
 #endif
 
 static const char *CSI = "\33["; // escape
@@ -26,16 +25,16 @@ const int white = 7;
 
 void clear()
 {
-    #ifdef SO_6502
-        puts("\30\f"); // rp6502 and others
-        // printf("\f"); // also clears console
-    #else
-        printf("\e[1;1H\e[2J"); // DOS/WINDOWS
-    #endif    
+#ifdef SO_6502
+    puts("\30\f"); // rp6502 and others
+    // printf("\f"); // also clears console
+#else
+    printf("\e[1;1H\e[2J"); // DOS/WINDOWS
+#endif
 }
 
 void setColor(int colorCode)
-{    
+{
     switch (colorCode)
     {
     case 0: // BLACK
@@ -70,91 +69,72 @@ void setColor(int colorCode)
     }
 }
 
-void anyKey()
-{    
-    char c;    
-    #ifdef SO_6502
-        while (!(RIA.ready & RIA_READY_RX_BIT))
-            ;
-        c = RIA.rx;
-    #else
-        c = getch();
-    #endif        
-}
-
-void charset(int aFrom, int aTo)
-{
-    int i;
-
-    /* Print ASCII values from 0 to 255 */
-    for (i = aFrom; i <= aTo; i++)
-    {
-        printf("%c: %d", i, i);
-        printf(" ");
-    }
-}
-
 int main()
-{   
+{
+    int a;
+    int b;
+    int choise;
+    choise = -1;
+
     clear();
     setColor(green);
 
-    // Choice variable
-    int choice = -1;
-    
-    // Variables to store the numbers
-    int a, b;
-        
     // Menu display
     printf("MENU:\n1. Addition\n2. Subtraction\n3. Multiplication\n4. Division\n5. Exit\n");
-    
+
     // Infinite Loop for choice input
-    while(1){
+    while (1)    {
         printf("\nEnter the operation you wish to perform:");
-        scanf("%d", &choice);
-        
-        // If-else ladder
-        if(choice == 1){
+        scanf("%d", &choise);
+
+        switch (choise)
+        {
+        case 1:
+            // Adding
+            printf("Enter First number :");
+            scanf("%d", &a);
+            printf("Enter Second number:");
+            scanf("%d", &b);
+            printf("\nResult: %d + %d = %d\n", a, b, (a + b));
+            break;
+
+        case 2:
+            // Substracting
+            printf("Enter First number :");
+            scanf("%d", &a);
+            printf("Enter Second number:");
+            scanf("%d", &b);
+            printf("\nResult: %d - %d = %d\n", a, b, (a - b));
+            break;
+
+        case 3:
+            // Multiplication
+            printf("Enter First number :");
+            scanf("%d", &a);
+            printf("Enter Second number:");
+            scanf("%d", &b);
+            printf("\nResult: %d * %d = %d\n", a, b, (a * b));
+            break;
+
+        case 4:
             // Number Input
             printf("Enter First number :");
             scanf("%d", &a);
             printf("Enter Second number:");
             scanf("%d", &b);
-            printf("\nResult: %d + %d = %d\n", a, b, (a+b));            
-        }
-        else if (choice == 2){
-            // Number Input
-            printf("Enter First number :");
-            scanf("%d", &a);
-            printf("Enter Second number:");
-            scanf("%d", &b);
-            printf("\nResult: %d - %d = %d\n", a, b, (a-b));            
-        }
-        else if (choice == 3){
-            // Number Input
-            printf("Enter First number :");
-            scanf("%d", &a);
-            printf("Enter Second number:");
-            scanf("%d", &b);
-            printf("\nResult: %d * %d = %d\n", a, b, (a*b));            
-        }
-        else if (choice == 4){
-            // Number Input
-            printf("Enter First number :");
-            scanf("%d", &a);
-            printf("Enter Second number:");
-            scanf("%d", &b);            
-            printf("\nResult: %d / %d = %d\n", a, b, (a/b));            
-        }
-        else if (choice == 5){
+            printf("\nResult: %d / %d = %d\n", a, b, (a / b));
+            break;
+
+        case 5: // BLUE
             printf("BYE!!!\n");
             // Termination of the Loop using break statement
+            return 0;
+
+        // operator doesn't match any case constant +, -, *, /
+        default:
+            printf("> Invalid Input\n");
+            choise = -1;
             break;
         }
-        else{
-            printf("> Invalid Input\n");
-        }
     }
-    
-    return 0;
 }
