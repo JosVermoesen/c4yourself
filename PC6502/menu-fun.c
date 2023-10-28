@@ -2,8 +2,8 @@
     Simple menu example in C
     Jos Vermoesen
  */
-#define SO_6502
-// #define SO_DOSWIN
+// #define SO_6502
+#define SO_DOSWIN
 
 #ifdef SO_6502
 #include <rp6502.h>
@@ -71,7 +71,22 @@ void setColor(int colorCode)
 
 int main()
 {
-    int a;
+    char* str1 = "2"; 
+    char* str2 = "12345.54"; 
+    int x; 
+  
+    // taking integer value using %d format specifier for 
+    // int 
+    sscanf(str1, "%d", &x); 
+    printf("The value of x : %d\n", x); 
+  
+    float y; 
+    // taking float value using %f format specifier for 
+    // float 
+    sscanf(str2, "%f", &y); 
+    printf("The value of x : %f\n", y); 
+
+    /* int a;
     int b;
     int choise;
     choise = -1;
@@ -80,10 +95,12 @@ int main()
     setColor(green);
 
     // Menu display
-    printf("MENU:\n1. Addition\n2. Subtraction\n3. Multiplication\n4. Division\n5. Exit\n");
+    printf("MENU:\n1. Addition\n2. Subtraction\n3. Multiplication\n4. Division\n5. Exit\n"); */
+
+
 
     // Infinite Loop for choice input
-    while (1)    {
+    /* while (1)    {
         printf("\nEnter the operation you wish to perform:");
         scanf("%d", &choise);
 
@@ -136,5 +153,5 @@ int main()
             choise = -1;
             break;
         }
-    }
+    } */
 }
