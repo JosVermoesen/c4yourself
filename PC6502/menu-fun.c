@@ -35,18 +35,7 @@ void clear()
 }
 
 void setColor(int colorCode)
-{
-    /*
-        static const char *BLACK = "30m"; // color codes
-        static const char *RED = "31m";
-        static const char *YELLOW = "93m";
-        static const char *GREEN = "32m";
-        static const char *BLUE = "34m";
-        static const char *MAGENTA = "35m";
-        static const char *CYAN = "36m";
-        static const char *WHITE = "37m";
-        static const char *UNDEFINED = "37m";
-     */
+{    
     switch (colorCode)
     {
     case 0: // BLACK
@@ -90,22 +79,7 @@ void anyKey()
         c = RIA.rx;
     #else
         c = getch();
-    #endif    
-    // printf("pressed: %c %d\n", c, c);
-
-    /* Use != EOF eventually, a value that is returned
-       by getchar() when the end of the file is reached.
-       Use CTRL+C to send EOF to the program. Does not work
-       always in the console window.
-    */
-    /* long nc;
-
-    nc = 0;
-    printf("Press some keys please (Q to quit) ");
-    while (getchar() != 'Q')
-
-        ++nc;
-    printf("You pressed %ld times\n", nc); */
+    #endif        
 }
 
 void charset(int aFrom, int aTo)
@@ -130,7 +104,7 @@ int main()
     
     // Variables to store the numbers
     int a, b;
-    
+        
     // Menu display
     printf("MENU:\n1. Addition\n2. Subtraction\n3. Multiplication\n4. Division\n5. Exit\n");
     
@@ -146,8 +120,7 @@ int main()
             scanf("%d", &a);
             printf("Enter Second number:");
             scanf("%d", &b);
-            printf("\nResult: %d + %d = %d\n", a, b, (a+b));
-            anyKey();
+            printf("\nResult: %d + %d = %d\n", a, b, (a+b));            
         }
         else if (choice == 2){
             // Number Input
@@ -155,8 +128,7 @@ int main()
             scanf("%d", &a);
             printf("Enter Second number:");
             scanf("%d", &b);
-            printf("\nResult: %d - %d = %d\n", a, b, (a-b));
-            anyKey();
+            printf("\nResult: %d - %d = %d\n", a, b, (a-b));            
         }
         else if (choice == 3){
             // Number Input
@@ -164,8 +136,7 @@ int main()
             scanf("%d", &a);
             printf("Enter Second number:");
             scanf("%d", &b);
-            printf("\nResult: %d * %d = %d\n", a, b, (a*b));
-            anyKey();
+            printf("\nResult: %d * %d = %d\n", a, b, (a*b));            
         }
         else if (choice == 4){
             // Number Input
@@ -173,8 +144,8 @@ int main()
             scanf("%d", &a);
             printf("Enter Second number:");
             scanf("%d", &b);
-            printf("\nResult: %d / %d = %d\n", a, b, (a/b));
-            anyKey();
+            result = a/b;
+            printf("\nResult: %d / %d = %d\n", a, b, (a/b));            
         }
         else if (choice == 5){
             printf("BYE!!!\n");
