@@ -71,38 +71,24 @@ void setColor(int colorCode)
 
 int main()
 {
-    char* str1 = "2"; 
-    char* str2 = "12345.54"; 
-    int x; 
-  
-    // taking integer value using %d format specifier for 
-    // int 
-    sscanf(str1, "%d", &x); 
-    printf("The value of x : %d\n", x); 
-  
-    float y; 
-    // taking float value using %f format specifier for 
-    // float 
-    sscanf(str2, "%f", &y); 
-    printf("The value of x : %f\n", y); 
 
-    /* int a;
+    int a;
     int b;
-    int choise;
-    choise = -1;
+    int choise; 
 
     clear();
     setColor(green);
 
     // Menu display
-    printf("MENU:\n1. Addition\n2. Subtraction\n3. Multiplication\n4. Division\n5. Exit\n"); */
+    printf("MENU:\n1. Addition\n2. Subtraction\n3. Multiplication\n4. Division\n5. Exit\n");
 
 
 
     // Infinite Loop for choice input
-    /* while (1)    {
+    while (1)    {
+        choise = -1;
         printf("\nEnter the operation you wish to perform:");
-        scanf("%d", &choise);
+        scanf("%i", &choise);
 
         switch (choise)
         {
@@ -150,8 +136,7 @@ int main()
         // operator doesn't match any case constant +, -, *, /
         default:
             printf("> Invalid Input\n");
-            choise = -1;
-            break;
+            return 0;
         }
-    } */
+    }
 }
