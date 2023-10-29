@@ -2,8 +2,8 @@
     Simple menu example in C
     Jos Vermoesen
  */
-#define SO_6502
-// #define SO_DOSWIN
+// #define SO_6502
+#define SO_DOSWIN
 
 #ifdef SO_6502
 #include <rp6502.h>
@@ -83,7 +83,7 @@ void setColor(int colorCode)
     }
 }
 
-int linearSearch(int arr[], int i, int val)
+int linearSearch(int arr[], int val, int i)
 {
     int y;
 
@@ -95,21 +95,40 @@ int linearSearch(int arr[], int i, int val)
     return -1;
 }
 
+int binarySearch(int arr[], int val, int x, int y) {
+    int m;
+
+  while (x<= y) {
+    m= x+ (y- x) / 2;
+
+    if (arr[m] == val)
+      return m;
+
+    if (arr[m] < val)
+      x= m+ 1;
+
+    else
+      y= m- 1;
+  }
+  return -1;
+}
+
 int main()
 {
     int choise;
-    int arr[] = {32, 54, 71, 89, 44};
-    int val = 89;
+    int arr[] = {12, 14, 17, 19, 89, 20, 21, 22};
+    int val;
     int i = sizeof(arr) / sizeof(arr[0]);
     int y;
 
     int linear;
+    int binary;
 
     clear();
     setColor(green);
 
     // Menu display
-    printf("MENU:\n0. Show array\n1. Linear Search\n5. Exit\n");
+    printf("MENU:\n0. Show array\n1. Linear Search for 89\n2. Binary Search for 22\n5. Exit\n");
 
     // Infinite Loop for choice input
     while (1)
@@ -127,10 +146,21 @@ int main()
                 printf("Value of %d: %d\n", y, arr[y]);
             }
             break;
+        
         case 1:
-            linear = linearSearch(arr, i, val);
-            (linear == -1) ? printf("\nThe Given Element Is Not Found At Any Index\n")
-                           : printf("\nThe Given Element 89 Found At Index Of: %d\n", linear);
+            val = 89;
+            linear = linearSearch(arr, val, i);
+            (linear == -1)
+                ? printf("\nThe Given Element Is Not Found At Any Index\n")
+                : printf("\nThe Given Element 89 Found At Index Of: %d\n", linear);
+            break;
+     
+        case 2:            
+            val = 22;
+            binary = binarySearch(arr, val, 0, i - 1);
+            (binary == -1)
+                ? printf("\nThe Given Element Is Not Found In The Given Sorted List\n")
+                : printf("\nThe Given Element 22 Is Found At The Index Of %d\n", binary);
             break;
 
         case 5:
