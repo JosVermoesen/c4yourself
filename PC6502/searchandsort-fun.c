@@ -83,23 +83,6 @@ void setColor(int colorCode)
     }
 }
 
-void menu()
-{
-    clear();
-    setColor(green);
-    printf("MENU:\n0. Menu refresh\n1. Linear Search for 89\n2. Binary Search for 22\n3. Quicksort\n5. Exit\n6. Show array\n");
-}
-
-void printArray(int arr[], int size)
-{
-    int i;
-    printf("\n");
-    for (i = 0; i < size; ++i)
-    {
-        printf("Value of %i: %d\n", i, arr[i]);
-    }
-}
-
 int linearSearch(int arr[], int val, int i)
 {
     int y;
@@ -163,24 +146,62 @@ void quickSort(int arr[], int x, int y)
 {
     if (x < y)
     {
-
         int pi = partition(arr, x, y);
         quickSort(arr, x, pi - 1);
         quickSort(arr, pi + 1, y);
     }
 }
 
+void bubbleSort(int arr[], int size) {
+    int step;
+    for (step = 0; step < size - 1; ++step) {
+        for (int i = 0; i < size - step - 1; ++i) {
+            if (arr[i] > arr[i + 1]) {
+                int temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
+            }
+        }
+    }
+}
+
+void printArray(int arr[], int size)
+{
+    int i;
+    printf("\n");
+    for (i = 0; i < size; ++i)
+    {
+        printf("Value of %i: %d\n", i, arr[i]);
+    }
+}
+
+void menu()
+{
+    clear();
+    setColor(green);
+    printf("MENU:\n0. Menu refresh\n1. Linear Search for 89\n2. Binary Search for 22\n3. Quicksort\n4. Bubblesort\n5. Exit\n6. Show array\n");
+}
+
 int main()
 {
     int choise;
+    /* int values[10000];
+    int size;
+    int i
+    printf("Enter size of the array: ");
+    scanf("%d", &size);
+    printf("Enter the array elements: ");
+    for(i = 0; i < size; i++)
+        scanf("%d", &values[i]); */
     int values[] = {99, 64, 25, 40, 42, 89, 20, 21, 22};
     int size = sizeof(values) / sizeof(values[0]);
     int value;
-
+        
     int linear;
     int binary;
 
     menu();
+
     while (1)
     {
         choise = -1;
@@ -210,12 +231,14 @@ int main()
             break;
 
         case 3:
-            printf("Given Unsorted Array Values \n");
-            printArray(values, size);
-
             quickSort(values, 0, size - 1);
-
             printf("Sorting Given Array In The Ascending Order: \n");
+            printArray(values, size);
+            break;
+
+        case 4:
+            bubbleSort(values, size);
+            printf("After sorting, the array in ascending order is: ");
             printArray(values, size);
             break;
 
