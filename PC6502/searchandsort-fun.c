@@ -2,8 +2,8 @@
     Simple menu example in C
     Jos Vermoesen
  */
-// #define SO_6502
-#define SO_DOSWIN
+#define SO_6502
+// #define SO_DOSWIN
 
 #ifdef SO_6502
 #include <rp6502.h>
@@ -95,22 +95,24 @@ int linearSearch(int arr[], int val, int i)
     return -1;
 }
 
-int binarySearch(int arr[], int val, int x, int y) {
+int binarySearch(int arr[], int val, int x, int y)
+{
     int m;
 
-  while (x<= y) {
-    m= x+ (y- x) / 2;
+    while (x <= y)
+    {
+        m = x + (y - x) / 2;
 
-    if (arr[m] == val)
-      return m;
+        if (arr[m] == val)
+            return m;
 
-    if (arr[m] < val)
-      x= m+ 1;
+        if (arr[m] < val)
+            x = m + 1;
 
-    else
-      y= m- 1;
-  }
-  return -1;
+        else
+            y = m - 1;
+    }
+    return -1;
 }
 
 int main()
@@ -146,7 +148,7 @@ int main()
                 printf("Value of %d: %d\n", y, arr[y]);
             }
             break;
-        
+
         case 1:
             val = 89;
             linear = linearSearch(arr, val, i);
@@ -154,8 +156,8 @@ int main()
                 ? printf("\nThe Given Element Is Not Found At Any Index\n")
                 : printf("\nThe Given Element 89 Found At Index Of: %d\n", linear);
             break;
-     
-        case 2:            
+
+        case 2:
             val = 22;
             binary = binarySearch(arr, val, 0, i - 1);
             (binary == -1)
