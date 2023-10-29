@@ -2,8 +2,8 @@
     Simple menu example in C
     Jos Vermoesen
  */
-// #define SO_6502
-#define SO_DOSWIN
+#define SO_6502
+// #define SO_DOSWIN
 
 #ifdef SO_6502
 #include <rp6502.h>
@@ -35,15 +35,15 @@ void clear()
 }
 
 void anyKey()
-{    
+{
     char c;
-    #ifdef SO_6502
-        while (!(RIA.ready & RIA_READY_RX_BIT))
-            ;
-        c = RIA.rx;
-    #else
-        c = getch();
-    #endif    
+#ifdef SO_6502
+    while (!(RIA.ready & RIA_READY_RX_BIT))
+        ;
+    c = RIA.rx;
+#else
+    c = getch();
+#endif
     // printf("pressed: %c %d\n", c, c);
 }
 
@@ -83,45 +83,57 @@ void setColor(int colorCode)
     }
 }
 
-int linearSearch(int arr[], int i, int val) {
-  
-  for (int y = 0; y < i; y++)
-    if (arr[y] == val)
-      return y;
-  return -1;
+int linearSearch(int arr[], int i, int val)
+{
+    int y;
+
+    for (y = 0; y < i; y++)
+    {
+        if (arr[y] == val)
+            return y;
+    }
+    return -1;
 }
 
-
-int main() {    
+int main()
+{
     int choise;
     int arr[] = {32, 54, 71, 89, 44};
     int val = 89;
     int i = sizeof(arr) / sizeof(arr[0]);
+    int y;
 
-  clear();
-  setColor(green);
+    int linear;
 
-  // Menu display
-    printf("MENU:\n1. Linear Search\n5. Exit\n");
+    clear();
+    setColor(green);
+
+    // Menu display
+    printf("MENU:\n0. Show array\n1. Linear Search\n5. Exit\n");
 
     // Infinite Loop for choice input
     while (1)
     {
         choise = -1;
-        printf("\nEnter the operation you wish to perform:");
+        printf("\nEnter the operation you wish to perform: ");
         scanf("%i", &choise);
 
         switch (choise)
         {
+        case 0:
+            printf("\n");
+            for (y = 0; y < i; y++)
+            {
+                printf("Value of %d: %d\n", y, arr[y]);
+            }
+            break;
         case 1:
-            int linear = linearSearch(arr, i, val);
-            (linear == -1) ?
-                printf("The Given Element Is Not Found At Any Index")
-                :
-                printf("The Given Element 89 Found At Index Of: %d", linear);            
+            linear = linearSearch(arr, i, val);
+            (linear == -1) ? printf("\nThe Given Element Is Not Found At Any Index\n")
+                           : printf("\nThe Given Element 89 Found At Index Of: %d\n", linear);
             break;
 
-        case 5: // BLUE
+        case 5:
             printf("BYE!!!\n");
             // Termination of the Loop using break statement
             return 0;
@@ -130,8 +142,8 @@ int main() {
         default:
             printf("> Invalid Input\n");
             printf("Any key to abort program\n");
-            anyKey();            
+            anyKey();
             return 0;
         }
-    }  
+    }
 }
