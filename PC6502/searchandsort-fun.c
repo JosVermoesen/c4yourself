@@ -2,8 +2,8 @@
     Simple search and sort examples in C
     Jos Vermoesen
  */
-#define IS_6502
-// #define IS_DOSWIN
+// #define IS_6502
+#define IS_DOSWIN
 
 #ifdef IS_6502
 #include <rp6502.h>
