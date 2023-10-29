@@ -2,10 +2,10 @@
     Simple menu example in C
     Jos Vermoesen
  */
-#define SO_6502
-// #define SO_DOSWIN
+// #define IS_6502
+#define IS_DOSWIN
 
-#ifdef SO_6502
+#ifdef IS_6502
 #include <rp6502.h>
 #include <stdio.h>
 #else
@@ -26,7 +26,7 @@ const int white = 7;
 
 void clear()
 {
-#ifdef SO_6502
+#ifdef IS_6502
     puts("\30\f"); // rp6502 and others
     // printf("\f"); // also clears console
 #else
@@ -37,7 +37,7 @@ void clear()
 void anyKey()
 {
     char c;
-#ifdef SO_6502
+#ifdef IS_6502
     while (!(RIA.ready & RIA_READY_RX_BIT))
         ;
     c = RIA.rx;
@@ -83,6 +83,14 @@ void setColor(int colorCode)
     }
 }
 
+void printArray(int arr[], int size) {
+    int i;
+            printf("\n");        
+  for (i = 0; i < size; ++i) {
+    printf("Value of %i: %d\n", i, arr[i]);    
+  }
+}
+
 int linearSearch(int arr[], int val, int i)
 {
     int y;
@@ -115,14 +123,47 @@ int binarySearch(int arr[], int val, int x, int y)
     return -1;
 }
 
+// Swap Function
+void swap(int *n1, int *n2) {
+  int m = *n1;
+  *n1 = *n2;
+  *n2 = m;
+}
+
+int partition(int arr[], int x, int y) {
+    int j;  
+  int pivot = arr[y];  
+  int i = (x - 1);
+
+  for (j = x; j < y; j++) {
+    if (arr[j] <= pivot) {        
+      i++;      
+      swap(&arr[i], &arr[j]);
+    }
+  }
+
+  swap(&arr[i + 1], &arr[y]);  
+  return (i + 1);
+}
+
+void quickSort(int arr[], int x, int y) {
+  if (x < y) {
+    
+    int pi = partition(arr, x, y);
+    
+    quickSort(arr, x, pi - 1);
+    
+    quickSort(arr, pi + 1, y);
+  }
+}
+
 int main()
 {
     int choise;
-    int arr[] = {12, 14, 17, 19, 89, 20, 21, 22};
-    int val;
-    int i = sizeof(arr) / sizeof(arr[0]);
-    int y;
-
+    int values[] = {99, 88, 64, 25, 40, 20, 42, 89, 20, 21, 22};    
+    int size = sizeof(values) / sizeof(values[0]);
+    int value;
+    
     int linear;
     int binary;
 
@@ -130,7 +171,7 @@ int main()
     setColor(green);
 
     // Menu display
-    printf("MENU:\n0. Show array\n1. Linear Search for 89\n2. Binary Search for 22\n5. Exit\n");
+    printf("MENU:\n0. Show array\n1. Linear Search for 89\n2. Binary Search for 22\n3. Quicksort\n5. Exit\n");
 
     // Infinite Loop for choice input
     while (1)
@@ -142,27 +183,33 @@ int main()
         switch (choise)
         {
         case 0:
-            printf("\n");
-            for (y = 0; y < i; y++)
-            {
-                printf("Value of %d: %d\n", y, arr[y]);
-            }
+            printArray(values,size);
             break;
 
         case 1:
-            val = 89;
-            linear = linearSearch(arr, val, i);
+            value = 89;
+            linear = linearSearch(values, value, size);
             (linear == -1)
                 ? printf("\nThe Given Element Is Not Found At Any Index\n")
                 : printf("\nThe Given Element 89 Found At Index Of: %d\n", linear);
             break;
 
         case 2:
-            val = 22;
-            binary = binarySearch(arr, val, 0, i - 1);
+            value = 22;
+            binary = binarySearch(values, value, 0, size - 1);
             (binary == -1)
                 ? printf("\nThe Given Element Is Not Found In The Given Sorted List\n")
                 : printf("\nThe Given Element 22 Is Found At The Index Of %d\n", binary);
+            break;
+
+        case 3:   
+            printf("Given Unsorted Array Values \n");
+            printArray(values, size);
+  
+            quickSort(values, 0, size - 1);
+  
+            printf("Sorting Given Array In The Ascending Order: \n");
+            printArray(values, size);         
             break;
 
         case 5:
