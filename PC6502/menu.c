@@ -34,17 +34,18 @@ void clear()
 #endif
 }
 
-void anyKey()
+char anyKey()
 {    
     char c;
     #ifdef SO_6502
         while (!(RIA.ready & RIA_READY_RX_BIT))
             ;
-        c = RIA.rx;
+        c = RIA.rx;        
     #else
-        c = getch();
+        c = getch();        
     #endif    
-    // printf("pressed: %c %d\n", c, c);
+    // printf("%c pressed (ascii: %d)\n", c, c);    
+    return c;
 }
 
 void setColor(int colorCode)
@@ -87,7 +88,8 @@ int main()
 {
     int a;
     int b;
-    int choise;
+    char c;    
+    int choise=-1;
 
     clear();
     setColor(green);
@@ -99,58 +101,60 @@ int main()
     while (1)
     {
         choise = -1;
-        printf("\nEnter the operation you wish to perform:");
-        scanf("%i", &choise);
+        printf("\nEnter the operation you wish to perform: ");
+        while ((choise < 0) || (choise > 9))
+        {
+            c = anyKey();
+            choise = (int)(c)-48; 
+        }
+        printf("%d\n", choise);
 
         switch (choise)
         {
         case 1:
-            // Adding
-            printf("Enter First number :");
+            // Adding            
+            printf("\nEnter First number :");
             scanf("%d", &a);
             printf("Enter Second number:");
             scanf("%d", &b);
-            printf("\nResult: %d + %d = %d\n", a, b, (a + b));
+            printf("Result: %d + %d = %d\n", a, b, (a + b));
             break;
 
         case 2:
             // Substracting
-            printf("Enter First number :");
+            printf("\nEnter First number :");
             scanf("%d", &a);
             printf("Enter Second number:");
             scanf("%d", &b);
-            printf("\nResult: %d - %d = %d\n", a, b, (a - b));
+            printf("Result: %d - %d = %d\n", a, b, (a - b));
             break;
 
         case 3:
             // Multiplication
-            printf("Enter First number :");
+            printf("\nEnter First number :");
             scanf("%d", &a);
             printf("Enter Second number:");
             scanf("%d", &b);
-            printf("\nResult: %d * %d = %d\n", a, b, (a * b));
+            printf("Result: %d * %d = %d\n", a, b, (a * b));
             break;
 
         case 4:
             // Number Input
-            printf("Enter First number :");
+            printf("\nEnter First number :");
             scanf("%d", &a);
             printf("Enter Second number:");
             scanf("%d", &b);
-            printf("\nResult: %d / %d = %d\n", a, b, (a / b));
+            printf("Result: %d / %d = %d\n", a, b, (a / b));
             break;
 
         case 5: // BLUE
-            printf("BYE!!!\n");
+            printf("\nBYE!!!\n");
             // Termination of the Loop using break statement
             return 0;
 
-        // operator doesn't match any case constant +, -, *, /
+        // operator doesn't match any case
         default:
-            printf("> Invalid Input\n");
-            printf("Any key to abort program\n");
-            anyKey();            
-            return 0;
+            printf("\n>Invalid Input - Try again\n");
         }
     }
 }
