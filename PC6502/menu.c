@@ -2,8 +2,8 @@
     Simple menu example in C
     Jos Vermoesen
  */
-// #define SO_6502
-#define SO_DOSWIN
+#define SO_6502
+// #define SO_DOSWIN
 
 #ifdef SO_6502
 #include <rp6502.h>
@@ -35,16 +35,16 @@ void clear()
 }
 
 char anyKey()
-{    
+{
     char c;
-    #ifdef SO_6502
-        while (!(RIA.ready & RIA_READY_RX_BIT))
-            ;
-        c = RIA.rx;        
-    #else
-        c = getch();        
-    #endif    
-    // printf("%c pressed (ascii: %d)\n", c, c);    
+#ifdef SO_6502
+    while (!(RIA.ready & RIA_READY_RX_BIT))
+        ;
+    c = RIA.rx;
+#else
+    c = getch();
+#endif
+    // printf("%c pressed (ascii: %d)\n", c, c);
     return c;
 }
 
@@ -88,8 +88,8 @@ int main()
 {
     int a;
     int b;
-    char c;    
-    int choise=-1;
+    char c;
+    int choise = -1;
 
     clear();
     setColor(green);
@@ -105,14 +105,14 @@ int main()
         while ((choise < 0) || (choise > 9))
         {
             c = anyKey();
-            choise = (int)(c)-48; 
+            choise = (int)(c)-48;
         }
         printf("%d\n", choise);
 
         switch (choise)
         {
         case 1:
-            // Adding            
+            // Adding
             printf("\nEnter First number :");
             scanf("%d", &a);
             printf("Enter Second number:");
