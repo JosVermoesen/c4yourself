@@ -2,8 +2,8 @@
     Simple menu example in C
     Jos Vermoesen
  */
-#define SO_6502
-// #define SO_DOSWIN
+// #define SO_6502
+#define SO_DOSWIN
 
 #ifdef SO_6502
 #include <rp6502.h>
@@ -13,7 +13,7 @@
 #include <stdio.h>
 #endif
 
-static const char *CSI = "\33["; // escape
+static const char *CSI = "\33["; // Escape
 
 const int black = 0;
 const int red = 1;
@@ -34,16 +34,28 @@ void clear()
 #endif
 }
 
-char anyKey()
+char anyKey(int kFrom, int kTo)
 {
     char c;
-#ifdef SO_6502
-    while (!(RIA.ready & RIA_READY_RX_BIT))
-        ;
-    c = RIA.rx;
-#else
-    c = getch();
-#endif
+    int choise = -1;
+
+    if (kTo == 0) 
+    {
+        kFrom = 32;
+        kTo= 254;
+    }    
+
+    while ((choise < kFrom) || (choise > kTo))
+    {
+        #ifdef SO_6502
+            while (!(RIA.ready & RIA_READY_RX_BIT))
+            ;
+            c = RIA.rx;
+        #else
+            c = getch();
+        #endif  
+        choise = (int)(c);          
+    }    
     // printf("%c pressed (ascii: %d)\n", c, c);
     return c;
 }
@@ -86,10 +98,8 @@ void setColor(int colorCode)
 
 int main()
 {
-    int a;
-    int b;
-    char c;
-    int choise = -1;
+    int a, b, iChoise;
+    char cChoise; // Key pressed     
 
     clear();
     setColor(green);
@@ -99,50 +109,47 @@ int main()
 
     // Infinite Loop for choice input
     while (1)
-    {
-        choise = -1;
-        printf("\nEnter the operation you wish to perform: ");
-        while ((choise < 0) || (choise > 9))
-        {
-            c = anyKey();
-            choise = (int)(c)-48;
-        }
-        printf("%d\n", choise);
+    {        
+        printf("\nEnter the operation you wish to perform: ");        
+        
+        cChoise = anyKey(48,9+48 );
+        iChoise = (int)(cChoise)-48;
+        printf("%d\n", iChoise);
 
-        switch (choise)
+        switch (iChoise)
         {
         case 1:
             // Adding
-            printf("\nEnter First number :");
+            printf("\nEnter First number: ");
             scanf("%d", &a);
-            printf("Enter Second number:");
+            printf("Enter Second number: ");
             scanf("%d", &b);
             printf("Result: %d + %d = %d\n", a, b, (a + b));
             break;
 
         case 2:
             // Substracting
-            printf("\nEnter First number :");
+            printf("\nEnter First number: ");
             scanf("%d", &a);
-            printf("Enter Second number:");
+            printf("Enter Second number: ");
             scanf("%d", &b);
             printf("Result: %d - %d = %d\n", a, b, (a - b));
             break;
 
         case 3:
             // Multiplication
-            printf("\nEnter First number :");
+            printf("\nEnter First number: ");
             scanf("%d", &a);
-            printf("Enter Second number:");
+            printf("Enter Second number: ");
             scanf("%d", &b);
             printf("Result: %d * %d = %d\n", a, b, (a * b));
             break;
 
         case 4:
             // Number Input
-            printf("\nEnter First number :");
+            printf("\nEnter First number: ");
             scanf("%d", &a);
-            printf("Enter Second number:");
+            printf("Enter Second number: ");
             scanf("%d", &b);
             printf("Result: %d / %d = %d\n", a, b, (a / b));
             break;
