@@ -39,23 +39,23 @@ char anyKey(int kFrom, int kTo)
     char c;
     int choise = -1;
 
-    if (kTo == 0) 
+    if (kTo == 0)
     {
         kFrom = 32;
-        kTo= 254;
-    }    
+        kTo = 254;
+    }
 
     while ((choise < kFrom) || (choise > kTo))
     {
-        #ifdef SO_6502
-            while (!(RIA.ready & RIA_READY_RX_BIT))
+#ifdef SO_6502
+        while (!(RIA.ready & RIA_READY_RX_BIT))
             ;
-            c = RIA.rx;
-        #else
-            c = getch();
-        #endif  
-        choise = (int)(c);          
-    }    
+        c = RIA.rx;
+#else
+        c = getch();
+#endif
+        choise = (int)(c);
+    }
     // printf("%c pressed (ascii: %d)\n", c, c);
     return c;
 }
@@ -99,7 +99,7 @@ void setColor(int colorCode)
 int main()
 {
     int a, b, iChoise;
-    char cChoise; // Key pressed     
+    char cChoise; // Key pressed
 
     clear();
     setColor(green);
@@ -109,10 +109,10 @@ int main()
 
     // Infinite Loop for choice input
     while (1)
-    {        
-        printf("\nEnter the operation you wish to perform: ");        
-        
-        cChoise = anyKey(48,9+48 );
+    {
+        printf("\nEnter the operation you wish to perform: ");
+
+        cChoise = anyKey(48, 9 + 48);
         iChoise = (int)(cChoise)-48;
         printf("%d\n", iChoise);
 
