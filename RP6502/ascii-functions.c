@@ -1,7 +1,12 @@
-// #define SO_6502
-#define SO_DOSWIN
+/*
+    Experimenting with ASCII values and escape codes in C.
+    Jos Vermoesen
+ */
 
-#ifdef SO_6502
+// #define IS_RP6502
+#define IS_DOSWIN
+
+#ifdef IS_RP6502
 #include <rp6502.h>
 #include <stdio.h>
 #else
