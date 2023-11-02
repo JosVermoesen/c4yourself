@@ -2,12 +2,12 @@
     Simple search and sort examples in C
     Jos Vermoesen
  */
-// #define IS_6502
-#define IS_DOSWIN
+#define IS_6502
+// #define IS_DOSWIN
 
 #ifdef IS_6502
-#include "ascii-functions.c"
 #include <rp6502.h>
+#include "ascii-functions.c"
 #include <stdio.h>
 #else
 #include "ascii-functions.c"
@@ -84,11 +84,17 @@ void quickSort(int arr[], int x, int y)
     }
 }
 
-void bubbleSort(int arr[], int size) {
+void bubbleSort(int arr[], int size)
+{
     int step;
-    for (step = 0; step < size - 1; ++step) {
-        for (int i = 0; i < size - step - 1; ++i) {
-            if (arr[i] > arr[i + 1]) {
+    int i;
+
+    for (step = 0; step < size - 1; ++step)
+    {
+        for (i = 0; i < size - step - 1; ++i)
+        {
+            if (arr[i] > arr[i + 1])
+            {
                 int temp = arr[i];
                 arr[i] = arr[i + 1];
                 arr[i + 1] = temp;
@@ -100,6 +106,7 @@ void bubbleSort(int arr[], int size) {
 void printArray(int arr[], int size)
 {
     int i;
+    
     printf("\n");
     for (i = 0; i < size; ++i)
     {
@@ -131,16 +138,16 @@ int main()
     int values[] = {99, 64, 25, 40, 42, 89, 20, 21, 22};
     int size = sizeof(values) / sizeof(values[0]);
     int value;
-        
+
     int linear;
     int binary;
 
     menu();
 
     while (1)
-    {        
+    {
         printf("\nEnter the operation you wish to perform: ");
-        
+
         cChoise = anyKey(48, 9 + 48);
         iChoise = (int)(cChoise)-48;
         printf("%d\n", iChoise);
@@ -191,6 +198,7 @@ int main()
         // operator doesn't match any case constant +, -, *, /
         default:
             printf("\n>Invalid Input - Try again\n");
+            break;
         }
     }
 }

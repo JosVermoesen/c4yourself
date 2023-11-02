@@ -4,14 +4,14 @@
 // #define SO_6502
 #define SO_DOSWIN
 
-#ifdef SO_6502    
+#ifdef SO_6502
 #include <rp6502.h>
 #include "ascii-functions.c"
-#include <stdio.h>    
+#include <stdio.h>
 #else
 #include "ascii-functions.c"
 #include <conio.h>
-#include <stdio.h>    
+#include <stdio.h>
 #endif
 
 void charset(int aFrom, int aTo)
@@ -45,7 +45,7 @@ int main()
     setColor(white);
 
     printf("\n\nPress any key to continue.\n");
-    cChoise = anyKey(0,0);
+    cChoise = anyKey(0, 0);
     clear();
 
     printf("Upper left %c = %d\n", a_ulc, a_ulc);
@@ -54,8 +54,8 @@ int main()
     printf("Lower right %c = %d\n", a_lrc, a_lrc);
     printf("Horizontal %c = %d\n", a_h, a_h);
     printf("Vertical %c = %d\n", a_v, a_v);
-    
-    cChoise = anyKey(0,0);
+
+    cChoise = anyKey(0, 0);
     iChoise = (int)(cChoise)-48;
     printf("%d\n", iChoise);
 
@@ -64,11 +64,11 @@ int main()
     iFlag = -1;
     while ((iFlag == -1))
     {
-        cChoise= anyKey(0,0);
+        cChoise = anyKey(0, 0);
         iChoise = (int)(cChoise);
 
         printf("pressed: %c %d (Press Q or q to quit)\n", cChoise, iChoise);
-        if ((iChoise ==113) || (iChoise==81))
+        if ((iChoise == 113) || (iChoise == 81))
         {
             iFlag = 0;
         }
