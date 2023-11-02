@@ -6,82 +6,14 @@
 #define IS_DOSWIN
 
 #ifdef IS_6502
+#include "ascii-functions.c"
 #include <rp6502.h>
 #include <stdio.h>
 #else
+#include "ascii-functions.c"
 #include <conio.h>
 #include <stdio.h>
 #endif
-
-static const char *CSI = "\33["; // escape
-
-const int black = 0;
-const int red = 1;
-const int green = 2;
-const int yellow = 3;
-const int blue = 4;
-const int magenta = 5;
-const int cyan = 6;
-const int white = 7;
-
-void clear()
-{
-#ifdef IS_6502
-    puts("\30\f"); // rp6502 and others
-    // printf("\f"); // also clears console
-#else
-    printf("\e[1;1H\e[2J"); // DOS/WINDOWS
-#endif
-}
-
-void anyKey()
-{
-    char c;
-#ifdef IS_6502
-    while (!(RIA.ready & RIA_READY_RX_BIT))
-        ;
-    c = RIA.rx;
-#else
-    c = getch();
-#endif
-    // printf("pressed: %c %d\n", c, c);
-}
-
-void setColor(int colorCode)
-{
-    switch (colorCode)
-    {
-    case 0: // BLACK
-        printf("%s%s", CSI, "30m");
-        break;
-    case 1: // RED
-        printf("%s%s", CSI, "31m");
-        break;
-    case 2: // GREEN
-        printf("%s%s", CSI, "32m");
-        break;
-    case 3: // YELLOW
-        printf("%s%s", CSI, "93m");
-        break;
-    case 4: // BLUE
-        printf("%s%s", CSI, "34m");
-        break;
-    case 5: // MAGENTA
-        printf("%s%s", CSI, "35m");
-        break;
-    case 6: // CYAN
-        printf("%s%s", CSI, "36m");
-        break;
-    case 7: // WHITE
-        printf("%s%s", CSI, "37m");
-        break;
-
-    // operator doesn't match any case constant +, -, *, /
-    default:
-        printf("Error! operator is not correct. Switching to white");
-        printf("%s%s", CSI, "37m");
-    }
-}
 
 int linearSearch(int arr[], int val, int i)
 {
@@ -184,7 +116,9 @@ void menu()
 
 int main()
 {
-    int choise;
+    int iChoise;
+    char cChoise; // Key pressed
+
     /* int values[10000];
     int size;
     int i
@@ -193,6 +127,7 @@ int main()
     printf("Enter the array elements: ");
     for(i = 0; i < size; i++)
         scanf("%d", &values[i]); */
+
     int values[] = {99, 64, 25, 40, 42, 89, 20, 21, 22};
     int size = sizeof(values) / sizeof(values[0]);
     int value;
@@ -203,12 +138,14 @@ int main()
     menu();
 
     while (1)
-    {
-        choise = -1;
+    {        
         printf("\nEnter the operation you wish to perform: ");
-        scanf("%i", &choise);
+        
+        cChoise = anyKey(48, 9 + 48);
+        iChoise = (int)(cChoise)-48;
+        printf("%d\n", iChoise);
 
-        switch (choise)
+        switch (iChoise)
         {
         case 0:
             menu();
@@ -253,10 +190,7 @@ int main()
 
         // operator doesn't match any case constant +, -, *, /
         default:
-            printf("> Invalid Input\n");
-            printf("Any key to abort program\n");
-            anyKey();
-            return 0;
+            printf("\n>Invalid Input - Try again\n");
         }
     }
 }

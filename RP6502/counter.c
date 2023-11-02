@@ -1,5 +1,12 @@
+// #define IS_6502
+#define IS_DOSWIN
+
+#ifdef IS_6502
 #include <rp6502.h>
 #include <stdio.h>
+#else
+#include <stdio.h>
+#endif
 
 void main()
 {
