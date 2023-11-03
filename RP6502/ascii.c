@@ -1,4 +1,18 @@
+/*
+    Experimenting ASCII values and escape codes in C.
+ */
+#define SO_6502
+// #define SO_DOSWIN
+
+#ifdef SO_6502
+#include <rp6502.h>
 #include "ascii-functions.c"
+#include <stdio.h>
+#else
+#include "ascii-functions.c"
+#include <conio.h>
+#include <stdio.h>
+#endif
 
 void charset(int aFrom, int aTo)
 {

@@ -2,7 +2,18 @@
     Simple search and sort examples in C
     Jos Vermoesen
  */
+#define IS_6502
+// #define IS_DOSWIN
+
+#ifdef IS_6502
+#include <rp6502.h>
 #include "ascii-functions.c"
+#include <stdio.h>
+#else
+#include "ascii-functions.c"
+#include <conio.h>
+#include <stdio.h>
+#endif
 
 int linearSearch(int arr[], int val, int i)
 {
