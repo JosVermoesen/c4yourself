@@ -8,7 +8,7 @@
 void clear()
 {
     unsigned i;
-    RIA.add0 = 0;
+    RIA.addr0 = 0;
     RIA.step0 = 1;
     for (i = 0; i < 57600u; i++)
         RIA.rw0 = 0;        
@@ -61,13 +61,13 @@ void scroll(bool x_scroll, bool y_scroll)
 
         if (x_scroll)
         {
-            xram0_struct_set(0xFF00, vga_model3_config_t, x_pos_px, x);
+            xram0_struct_set(0xFF00, vga_mode3_config_t, x_pos_px, x);
             if (++x >= 320)
                 x = -320;
         }
         if (y_scroll)
         {
-            xram0_struct_set(0xFF00, vga_model3_config_t, y_pos_px, y);
+            xram0_struct_set(0xFF00, vga_mode3_config_t, y_pos_px, y);
             if (++y >= 180)
                 y = -180;
         }
@@ -83,14 +83,14 @@ void main()
 
     clear();
 
-    xram0_struct_set(0xFF00, vga_model3_config_t, x_wrap, true);
-    xram0_struct_set(0xFF00, vga_model3_config_t, y_wrap, true);
-    xram0_struct_set(0xFF00, vga_model3_config_t, x_pos_px, 100);
-    xram0_struct_set(0xFF00, vga_model3_config_t, y_pos_px, -100);
-    xram0_struct_set(0xFF00, vga_model3_config_t, width_px, 320);
-    xram0_struct_set(0xFF00, vga_model3_config_t, height_px, 180);
-    xram0_struct_set(0xFF00, vga_model3_config_t, xram_data_ptr, 0x0000);
-    xram0_struct_set(0xFF00, vga_model3_config_t, xram_palette_ptr, 0xFFFF);
+    xram0_struct_set(0xFF00, vga_mode3_config_t, x_wrap, true);
+    xram0_struct_set(0xFF00, vga_mode3_config_t, y_wrap, true);
+    xram0_struct_set(0xFF00, vga_mode3_config_t, x_pos_px, 100);
+    xram0_struct_set(0xFF00, vga_mode3_config_t, y_pos_px, -100);
+    xram0_struct_set(0xFF00, vga_mode3_config_t, width_px, 320);
+    xram0_struct_set(0xFF00, vga_mode3_config_t, height_px, 180);
+    xram0_struct_set(0xFF00, vga_mode3_config_t, xram_data_ptr, 0x0000);
+    xram0_struct_set(0xFF00, vga_mode3_config_t, xram_palette_ptr, 0xFFFF);
 
     xreg(1, 0, 1, 3, 2, 0xFF00); // Mode 3
 

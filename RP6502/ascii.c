@@ -1,11 +1,11 @@
 /*
     Experimenting ASCII values and escape codes in C.
  */
-// #define IS_RP6502
-#define IS_DOSWIN
+#define IS_RP6502
+// #define IS_DOSWIN
 
 #include <stdio.h>
-#include "key-functions.c"
+#include "kc-functions.c"
 
 void charset(int aFrom, int aTo)
 {

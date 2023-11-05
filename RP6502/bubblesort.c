@@ -2,13 +2,7 @@
  Bubble sort in C
  Source code origin: https://www.youtube.com/watch?v=qLVrwCvVPGo
 */
-// #define IS_RP6502
-#define IS_DOSWIN
-
 #include <stdio.h>
-#ifdef IS_RP6502
-#include <rp6502.h>
-#endif
 
 void iSortAsc(int tosort[], int size)
 {

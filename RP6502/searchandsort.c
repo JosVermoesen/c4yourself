@@ -3,17 +3,11 @@
     Jos Vermoesen
  */
 
-// #define IS_RP6502
-#define IS_DOSWIN
+#define IS_RP6502
+// #define IS_DOSWIN
 
-#include "ascii-functions.c"
+#include "kc-functions.c"
 #include <stdio.h>
-
-#ifdef IS_RP6502
-#include <rp6502.h>
-#else
-#include <conio.h>
-#endif
 
 int linearSearch(int arr[], int val, int i)
 {
@@ -106,7 +100,7 @@ void bubbleSort(int arr[], int size)
 void printArray(int arr[], int size)
 {
     int i;
-    
+
     printf("\nArray (0 to %d):\n", size);
     for (i = 0; i < size; ++i)
     {
@@ -124,9 +118,9 @@ void menu()
 
 int main()
 {
-    int lFlag; // while loopflag    
+    int lFlag;    // while loopflag
     char cChoise; // Key pressed
-    int iChoise; // Int value of cChoise in range 0 till 9
+    int iChoise;  // Int value of cChoise in range 0 till 9
 
     /* int values[10000];
     int size;
@@ -146,13 +140,13 @@ int main()
 
     menu();
 
-    lFlag=-1;
-    while ((lFlag ==-1))
+    lFlag = -1;
+    while ((lFlag == -1))
     {
         printf("\nEnter the operation you wish to perform: ");
 
         cChoise = anyKey(48, 9 + 48); // Limit char keyrange '0' till '9'
-        iChoise = (int)(cChoise)-48; // Int value of cChoise in range 0 till 9
+        iChoise = (int)(cChoise)-48;  // Int value of cChoise in range 0 till 9
         printf("%d\n", iChoise);
 
         switch (iChoise)
@@ -203,8 +197,8 @@ int main()
         default:
             printf("\n>Invalid Input - Try again\n");
             break;
-        }        
+        }
     }
-    
+
     return 0;
 }

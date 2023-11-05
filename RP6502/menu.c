@@ -4,17 +4,11 @@
     Jos Vermoesen
  */
 
-// #define IS_RP6502
-#define IS_DOSWIN
+#define IS_RP6502
+// #define IS_DOSWIN
 
-#include "ascii-functions.c"
+#include "kc-functions.c"
 #include <stdio.h>
-
-#ifdef IS_RP6502
-#include <rp6502.h>
-#else
-#include <conio.h>
-#endif
 
 int main()
 {
@@ -78,7 +72,7 @@ int main()
         case 5: // BLUE
             printf("\nBYE!!!\n");
             // Termination of the Loop using flag state
-            lFlag=0;
+            lFlag = 0;
             break;
 
         // operator doesn't match any case
