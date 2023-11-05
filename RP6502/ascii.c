@@ -5,13 +5,7 @@
 #define IS_DOSWIN
 
 #include <stdio.h>
-#include "ascii-functions.c"
-
-#ifdef IS_RP6502
-#include <rp6502.h>
-#else
-#include <conio.h>
-#endif
+#include "key-functions.c"
 
 void charset(int aFrom, int aTo)
 {
