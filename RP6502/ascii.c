@@ -1,17 +1,16 @@
 /*
     Experimenting ASCII values and escape codes in C.
  */
-#define SO_6502
-// #define SO_DOSWIN
+// #define IS_RP6502
+#define IS_DOSWIN
 
-#ifdef SO_6502
+#include <stdio.h>
+#include "ascii-functions.c"
+
+#ifdef IS_RP6502
 #include <rp6502.h>
-#include "ascii-functions.c"
-#include <stdio.h>
 #else
-#include "ascii-functions.c"
 #include <conio.h>
-#include <stdio.h>
 #endif
 
 void charset(int aFrom, int aTo)
@@ -64,7 +63,7 @@ int main()
     iFlag = -1;
     while ((iFlag == -1))
     {
-        cChoise = anyKey(0, 0);
+        cChoise = anyKey(0, 254);
         iChoise = (int)(cChoise);
 
         printf("pressed: %c %d (Press Q or q to quit)\n", cChoise, iChoise);

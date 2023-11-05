@@ -2,17 +2,17 @@
     Simple search and sort examples in C
     Jos Vermoesen
  */
-#define IS_6502
-// #define IS_DOSWIN
 
-#ifdef IS_6502
+// #define IS_RP6502
+#define IS_DOSWIN
+
+#include "ascii-functions.c"
+#include <stdio.h>
+
+#ifdef IS_RP6502
 #include <rp6502.h>
-#include "ascii-functions.c"
-#include <stdio.h>
 #else
-#include "ascii-functions.c"
 #include <conio.h>
-#include <stdio.h>
 #endif
 
 int linearSearch(int arr[], int val, int i)
@@ -107,11 +107,12 @@ void printArray(int arr[], int size)
 {
     int i;
     
-    printf("\n");
+    printf("\nArray (0 to %d):\n", size);
     for (i = 0; i < size; ++i)
     {
-        printf("Value of %i: %d\n", i, arr[i]);
+        printf("%d, ", arr[i]);
     }
+    printf("\n");
 }
 
 void menu()
@@ -123,8 +124,9 @@ void menu()
 
 int main()
 {
-    int iChoise;
+    int lFlag; // while loopflag    
     char cChoise; // Key pressed
+    int iChoise; // Int value of cChoise in range 0 till 9
 
     /* int values[10000];
     int size;
@@ -144,12 +146,13 @@ int main()
 
     menu();
 
-    while (1)
+    lFlag=-1;
+    while ((lFlag ==-1))
     {
         printf("\nEnter the operation you wish to perform: ");
 
-        cChoise = anyKey(48, 9 + 48);
-        iChoise = (int)(cChoise)-48;
+        cChoise = anyKey(48, 9 + 48); // Limit char keyrange '0' till '9'
+        iChoise = (int)(cChoise)-48; // Int value of cChoise in range 0 till 9
         printf("%d\n", iChoise);
 
         switch (iChoise)
@@ -189,7 +192,8 @@ int main()
         case 5:
             printf("BYE!!!\n");
             // Termination of the Loop using break statement
-            return 0;
+            lFlag = 0;
+            break;
 
         case 6:
             printArray(values, size);
@@ -199,6 +203,8 @@ int main()
         default:
             printf("\n>Invalid Input - Try again\n");
             break;
-        }
+        }        
     }
+    
+    return 0;
 }

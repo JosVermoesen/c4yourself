@@ -4,21 +4,21 @@
     Jos Vermoesen
  */
 
-#define SO_6502
-// #define SO_DOSWIN
+// #define IS_RP6502
+#define IS_DOSWIN
 
-#ifdef SO_6502
+#include "ascii-functions.c"
+#include <stdio.h>
+
+#ifdef IS_RP6502
 #include <rp6502.h>
-#include "ascii-functions.c"
-#include <stdio.h>
 #else
-#include "ascii-functions.c"
 #include <conio.h>
-#include <stdio.h>
 #endif
 
 int main()
 {
+    int lFlag; // while loopflag
     int a, b, iChoise;
     char cChoise; // Key pressed
 
@@ -28,8 +28,8 @@ int main()
     // Menu display
     printf("MENUUTJE:\n1. Addition\n2. Subtraction\n3. Multiplication\n4. Division\n5. Exit\n");
 
-    // Infinite Loop for choice input
-    while (1)
+    lFlag = -1;
+    while (lFlag)
     {
         printf("\nEnter the operation you wish to perform: ");
 
@@ -77,12 +77,16 @@ int main()
 
         case 5: // BLUE
             printf("\nBYE!!!\n");
-            // Termination of the Loop using break statement
-            return 0;
+            // Termination of the Loop using flag state
+            lFlag=0;
+            break;
 
         // operator doesn't match any case
         default:
             printf("\n>Invalid Input - Try again\n");
+            break;
         }
     }
+
+    return 0;
 }

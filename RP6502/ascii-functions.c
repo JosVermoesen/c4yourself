@@ -1,12 +1,9 @@
-#define SO_6502
-// #define SO_DOSWIN
-
-#ifdef SO_6502
-#include <rp6502.h>
 #include <stdio.h>
+
+#ifdef IS_RP6502
+#include <rp6502.h>
 #else
 #include <conio.h>
-#include <stdio.h>
 #endif
 
 static const char *CSI = "\33["; // Escape
@@ -22,7 +19,7 @@ const int white = 7;
 
 void clear()
 {
-#ifdef SO_6502
+#ifdef IS_RP6502
     puts("\30\f"); // rp6502 and others
     // printf("\f"); // also clears console
 #else
@@ -90,7 +87,7 @@ char anyKey(int kFrom, int kTo)
 
     while ((choise < kFrom) || (choise > kTo))
     {
-#ifdef SO_6502
+#ifdef IS_RP6502
         while (!(RIA.ready & RIA_READY_RX_BIT))
             ;
         c = RIA.rx;
