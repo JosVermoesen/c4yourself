@@ -3,37 +3,14 @@
 	"tasks": [
 		{
 			"type": "cppbuild",
-			"label": "gcc-12 Windows",
+			"label": "C/C++: gcc.exe build active file",
 			"command": "C:\\mingw64\\bin\\gcc.exe",
 			"args": [
 				"-fdiagnostics-color=always",
 				"-g",
 				"${file}",
 				"-o",
-				"${workspaceFolder}\\${fileBasenameNoExtension}.exe"
-			],
-			"options": {
-				"cwd": "${fileDirname}"
-			},
-			"problemMatcher": [
-				"$gcc"
-			],
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"detail": "compiler: C:\\mingw64\\bin\\gcc.exe"
-		},
-		{
-			"type": "cppbuild",
-			"label": "gcc-12 Linux Mint",
-			"command": "/usr/bin/gcc-12",
-			"args": [
-				"-fdiagnostics-color=always",
-				"-g",
-				"${file}",
-				"-o",
-				"${fileDirname}/${fileBasenameNoExtension}"
+				"${fileDirname}\\${fileBasenameNoExtension}.exe"
 			],
 			"options": {
 				"cwd": "${fileDirname}"
@@ -42,7 +19,7 @@
 				"$gcc"
 			],
 			"group": "build",
-			"detail": "compiler: /usr/bin/gcc-12"
+			"detail": "compiler: C:\\mingw64\\bin\\gcc.exe"
 		}
 	]
 }

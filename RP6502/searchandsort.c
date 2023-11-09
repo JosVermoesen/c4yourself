@@ -3,8 +3,8 @@
     Jos Vermoesen
  */
 
-#define IS_RP6502
-// #define IS_DOSWIN
+// #define IS_RP6502
+#define IS_DOSWIN
 
 #include "kc-functions.c"
 #include <stdio.h>

@@ -1,8 +1,8 @@
 /*
     Experimenting ASCII values and escape codes in C.
  */
-#define IS_RP6502
-// #define IS_DOSWIN
+// #define IS_RP6502
+#define IS_DOSWIN
 
 #include <stdio.h>
 #include "kc-functions.c"
