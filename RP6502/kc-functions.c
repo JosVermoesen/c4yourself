@@ -122,6 +122,7 @@ char anyKey(int kFrom, int kTo)
 void printAt(int row, int col)
 {
     printf("%s%d;%dH", CSI, row + 1, col + 1);
+    // printf("\x1b[%d;%df", row, col);
 }
 
 void eraseLine(int row)
