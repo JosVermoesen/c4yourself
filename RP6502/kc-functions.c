@@ -74,6 +74,25 @@ void setColor(int colorCode)
      */
 }
 
+char anyCtrl()
+{
+    char c;
+    printf("Press any key\n");
+    c = getch(); // get the key that was pressed
+    switch (c)
+    {
+    case 1: // ASCII code for ctrl+A
+        printf("You pressed ctrl+A\n");
+        break;
+    case 2: // ASCII code for ctrl+B
+        printf("You pressed ctrl+B\n");
+        break;
+    default:
+        printf("You pressed something else\n");
+    }
+    return 0;
+}
+
 char anyKey(int kFrom, int kTo)
 {
     char c;

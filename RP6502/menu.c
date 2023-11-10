@@ -40,6 +40,10 @@ int main()
 
         switch (iChoise)
         {
+        case 0:
+            anyCtrl();
+            break;
+            
         case 1:
             // Adding
             printf("\nEnter First number: ");
