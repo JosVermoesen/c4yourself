@@ -4,11 +4,21 @@
     Jos Vermoesen
  */
 
-#define IS_RP6502
-// #define IS_DOSWIN
+// #define IS_RP6502
+#define IS_DOSWIN
 
 #include "kc-functions.c"
 #include <stdio.h>
+
+void menu()
+{
+    clear();
+    setColor(green);
+
+    // Menu display line 0 to 5
+    printAt(0, 0);
+    printf("MENU:\n1. Addition\n2. Subtraction\n3. Multiplication\n4. Division\n5. Exit\n");
+}
 
 int main()
 {
@@ -16,15 +26,12 @@ int main()
     int a, b, iChoise;
     char cChoise; // Key pressed
 
-    clear();
-    setColor(green);
-
-    // Menu display
-    printf("MENUUTJE:\n1. Addition\n2. Subtraction\n3. Multiplication\n4. Division\n5. Exit\n");
+    menu();
 
     lFlag = -1;
     while (lFlag)
     {
+        printAt(6, 0);
         printf("\nEnter the operation you wish to perform: ");
 
         cChoise = anyKey(48, 9 + 48);
@@ -40,6 +47,8 @@ int main()
             printf("Enter Second number: ");
             scanf("%d", &b);
             printf("Result: %d + %d = %d\n", a, b, (a + b));
+
+            clearLines(9, 13, -1);
             break;
 
         case 2:
@@ -49,6 +58,8 @@ int main()
             printf("Enter Second number: ");
             scanf("%d", &b);
             printf("Result: %d - %d = %d\n", a, b, (a - b));
+
+            clearLines(9, 13, -1);
             break;
 
         case 3:
@@ -58,6 +69,8 @@ int main()
             printf("Enter Second number: ");
             scanf("%d", &b);
             printf("Result: %d * %d = %d\n", a, b, (a * b));
+
+            clearLines(9, 13, -1);
             break;
 
         case 4:
@@ -67,6 +80,8 @@ int main()
             printf("Enter Second number: ");
             scanf("%d", &b);
             printf("Result: %d / %d = %d\n", a, b, (a / b));
+
+            clearLines(9, 13, -1);
             break;
 
         case 5: // BLUE
@@ -78,6 +93,7 @@ int main()
         // operator doesn't match any case
         default:
             printf("\n>Invalid Input - Try again\n");
+            clearLines(9, 11, -1);
             break;
         }
     }

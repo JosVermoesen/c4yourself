@@ -99,3 +99,31 @@ char anyKey(int kFrom, int kTo)
     // printf("%c pressed (ascii: %d)\n", c, c);
     return c;
 }
+
+void printAt(int row, int col)
+{
+    printf("%s%d;%dH", CSI, row + 1, col + 1);
+}
+
+void eraseLine(int row)
+{
+    printAt(row, 0);
+    printf("%sK", CSI);
+}
+
+void clearLines(int from, int to, int waitKey)
+{
+    int i;
+    char cChoise;
+
+    if (waitKey)
+    {
+        printf("\nAny key to continue ");
+        cChoise = anyKey(0, 254);
+    }
+
+    for (i = from; i <= to; i++)
+    {
+        eraseLine(i);
+    }
+}
