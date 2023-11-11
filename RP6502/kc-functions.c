@@ -6,7 +6,7 @@
 #include <conio.h>
 #endif
 
-static const char *CSI = "\33["; // Escape
+static const char *CSI = "\x1b["; // Escape
 
 const int black = 0;
 const int red = 1;
@@ -20,8 +20,8 @@ const int white = 7;
 void clear()
 {
 #ifdef IS_RP6502
-    puts("\30\f"); // rp6502 and others
-    // printf("\f"); // also clears console
+    // puts("\30\f"); // rp6502 and others
+    printf("\f"); // form feed
 #else
     printf("\e[1;1H\e[2J"); // DOS/WINDOWS
 #endif
@@ -78,7 +78,15 @@ char anyCtrl()
 {
     char c;
     printf("Press any key\n");
-    c = getch(); // get the key that was pressed
+
+#ifdef IS_RP6502
+    while (!(RIA.ready & RIA_READY_RX_BIT))
+        ;
+    c = RIA.rx;
+#else
+    c = getch();
+#endif
+
     switch (c)
     {
     case 1: // ASCII code for ctrl+A
@@ -87,12 +95,16 @@ char anyCtrl()
     case 2: // ASCII code for ctrl+B
         printf("You pressed ctrl+B\n");
         break;
+    case 26: // ASCII code for ctrl+Z
+        printf("You pressed ctrl+Z\n");
+        break;
     default:
         printf("You pressed something else\n");
     }
     return 0;
 }
 
+// ABCDEFGHIJKLMNOPQRSTUVWXYZ
 char anyKey(int kFrom, int kTo)
 {
     char c;
@@ -121,14 +133,22 @@ char anyKey(int kFrom, int kTo)
 
 void printAt(int row, int col)
 {
+#ifdef IS_RP6502
     printf("%s%d;%dH", CSI, row + 1, col + 1);
-    // printf("\x1b[%d;%df", row, col);
+#else
+    printf("%s%d;%dH", CSI, row + 1, col + 1);
+#endif
 }
 
 void eraseLine(int row)
 {
     printAt(row, 0);
+
+#ifdef IS_RP6502
+    printf("%s2K", CSI);
+#else
     printf("%sK", CSI);
+#endif
 }
 
 void clearLines(int from, int to, int waitKey)
