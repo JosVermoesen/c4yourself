@@ -21,22 +21,27 @@ int linearSearch(int arr[], int val, int i)
     return -1;
 }
 
-int binarySearch(int arr[], int val, int x, int y)
+int binarySearch(int arr[], int val, int startAt, int arrSize)
 {
     int m;
+    int count;
 
-    while (x <= y)
+    while (startAt <= arrSize)
     {
-        m = x + (y - x) / 2;
+        m = startAt + (arrSize - startAt) / 2;
+        count = count + 1;
 
         if (arr[m] == val)
+        {
+            printf("Found after %d splits\n", count);
             return m;
+        }
 
         if (arr[m] < val)
-            x = m + 1;
+            startAt = m + 1;
 
         else
-            y = m - 1;
+            arrSize = m - 1;
     }
     return -1;
 }
@@ -118,9 +123,10 @@ void menu()
 
 int main()
 {
-    int lFlag;    // while loopflag
-    char cChoise; // Key pressed
-    int iChoise;  // Int value of cChoise in range 0 till 9
+    int lFlag;       // while loopflag
+    char cChoise;    // Key pressed
+    int iChoise;     // Int value of cChoise in range 0 till 9
+    int sorted = -1; // Values should be sorted first before using binary search
 
     /* int values[10000];
     int size;
@@ -131,7 +137,7 @@ int main()
     for(i = 0; i < size; i++)
         scanf("%d", &values[i]); */
 
-    int values[] = {99, 64, 25, 40, 42, 89, 20, 21, 22};
+    int values[] = {99, 64, 25, 40, 42, 89, 20, 21, 22, 98, 63, 24, 41, 44, 84, 29, 28, 27};
     int size = sizeof(values) / sizeof(values[0]);
     int value;
 
@@ -164,23 +170,32 @@ int main()
             break;
 
         case 2:
-            value = 22;
-            binary = binarySearch(values, value, 0, size - 1);
-            (binary == -1)
-                ? printf("\nThe Given Element Is Not Found In The Given Sorted List\n")
-                : printf("\nThe Given Element 22 Is Found At The Index Of %d\n", binary);
+            if (sorted == -1)
+            {
+                printf("\nThe array should be sorted first (use Quick- or Bubblesort)\n");
+            }
+            else
+            {
+                value = 22;
+                binary = binarySearch(values, value, 0, size - 1);
+                (binary == -1)
+                    ? printf("\nThe Given Element Is Not Found In The Given Sorted List\n")
+                    : printf("\nThe Given Element 22 Is Found At The Index Of %d\n", binary);
+            }
             break;
 
         case 3:
             quickSort(values, 0, size - 1);
             printf("Sorting Given Array In The Ascending Order: \n");
             printArray(values, size);
+            sorted = 0;
             break;
 
         case 4:
             bubbleSort(values, size);
             printf("After sorting, the array in ascending order is: ");
             printArray(values, size);
+            sorted = 0;
             break;
 
         case 5:
