@@ -7,9 +7,6 @@
 #include <string.h>
 #include <stdio.h>
 
-#define SO_WINDOWS
-// #define SO_UNIX
-
 /* Operating system detection */
 /* #ifdef _WIN32
 #define SO_WINDOWS

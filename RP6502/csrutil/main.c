@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include "csrutil.c"
 
+// #define SO_WINDOWS
+#define SO_UNIX
+
 int main()
 {
     scrAttributes colors;
