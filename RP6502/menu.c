@@ -7,18 +7,10 @@
 // #define IS_RP6502
 #define IS_DOSWIN
 
-#include "kc-functions.c"
+#include "kc_functions.c"
 #include <stdio.h>
 
-void menu()
-{
-    clear();
-    setColor(green);
-
-    // Menu display line 0 to 5
-    printAt(0, 0);
-    printf("MENU:\n1. Addition\n2. Subtraction\n3. Multiplication\n4. Division\n5. Exit\n");
-}
+void menu();
 
 int main()
 {
@@ -103,4 +95,14 @@ int main()
     }
 
     return 0;
+}
+
+void menu()
+{
+    clear();
+    setColor(green);
+
+    // Menu display line 0 to 5
+    printAt(0, 0);
+    printf("MENU:\n1. Addition\n2. Subtraction\n3. Multiplication\n4. Division\n5. Exit\n");
 }

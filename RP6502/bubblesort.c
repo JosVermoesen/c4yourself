@@ -4,6 +4,34 @@
 */
 #include <stdio.h>
 
+void iSortAsc(int[], int);
+void iSortDsc(int[], int);
+void cSortAsc(char[], int);
+void cSortDsc(char[], int);
+void iPrintArray(int[], int);
+void cPrintArray(char[], int);
+
+int main()
+{
+    int iArray[] = {9, 6, 3, 0, 5, 4, 3, 2, 1};
+    int iSize = sizeof(iArray) / sizeof(iArray[0]);
+
+    char sArray[] = {'e', 'g', 'i', 'd', 'a', 'f', 'b', 'h', 'c'};
+    int sSize = sizeof(sArray) / sizeof(sArray[0]);
+
+    iSortAsc(iArray, iSize);
+    iPrintArray(iArray, iSize);
+    iSortDsc(iArray, iSize);
+    iPrintArray(iArray, iSize);
+
+    cSortAsc(sArray, sSize);
+    cPrintArray(sArray, sSize);
+    cSortDsc(sArray, sSize);
+    cPrintArray(sArray, sSize);
+
+    return 0;
+}
+
 void iSortAsc(int tosort[], int size)
 {
     int temp;
@@ -98,25 +126,4 @@ void cPrintArray(char sorted[], int size)
         printf("%c ", sorted[i]);
     }
     printf("\n");
-}
-
-int main()
-{
-    int iArray[] = {9, 6, 3, 0, 5, 4, 3, 2, 1};
-    int iSize = sizeof(iArray) / sizeof(iArray[0]);
-
-    char sArray[] = {'e', 'g', 'i', 'd', 'a', 'f', 'b', 'h', 'c'};
-    int sSize = sizeof(sArray) / sizeof(sArray[0]);
-
-    iSortAsc(iArray, iSize);
-    iPrintArray(iArray, iSize);
-    iSortDsc(iArray, iSize);
-    iPrintArray(iArray, iSize);
-
-    cSortAsc(sArray, sSize);
-    cPrintArray(sArray, sSize);
-    cSortDsc(sArray, sSize);
-    cPrintArray(sArray, sSize);
-
-    return 0;
 }

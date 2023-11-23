@@ -5,19 +5,9 @@
 #define IS_DOSWIN
 
 #include <stdio.h>
-#include "kc-functions.c"
+#include "kc_functions.c"
 
-void charset(int aFrom, int aTo)
-{
-    int i;
-
-    /* Print ASCII values from 0 to 255 */
-    for (i = aFrom; i <= aTo; i++)
-    {
-        printf("%c: %d", i, i);
-        printf(" ");
-    }
-}
+void charset(int, int);
 
 int main()
 {
@@ -55,7 +45,7 @@ int main()
     printf("Char: %c %d\n", cChoise, iChoise);
 
     iFlag = -1;
-    while ((iFlag == -1))
+    while (iFlag == -1)
     {
         cChoise = anyKey(0, 254);
         iChoise = (int)(cChoise);
@@ -67,4 +57,16 @@ int main()
         }
     }
     return 0;
+}
+
+void charset(int aFrom, int aTo)
+{
+    int i;
+
+    /* Print ASCII values from 0 to 255 */
+    for (i = aFrom; i <= aTo; i++)
+    {
+        printf("%c: %d", i, i);
+        printf(" ");
+    }
 }

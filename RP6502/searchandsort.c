@@ -6,7 +6,7 @@
 // #define IS_RP6502
 #define IS_DOSWIN
 
-#include "kc-functions.c"
+#include "kc_functions.c"
 #include <stdio.h>
 
 int linearSearch(int arr[], int val, int i)
@@ -147,7 +147,7 @@ int main()
     menu();
 
     lFlag = -1;
-    while ((lFlag == -1))
+    while (lFlag == -1)
     {
         printf("\nEnter the operation you wish to perform: ");
 
